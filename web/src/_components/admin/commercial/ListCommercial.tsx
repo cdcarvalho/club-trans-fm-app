@@ -78,7 +78,7 @@ const ListCommercial = () => {
             <th className="cabecalho">Telefone</th>
             <th className="cabecalho">Preço</th>
             <th className="cabecalho">Total de Chamadas</th>
-            <th className="cabecalho">Vencimento</th>
+            <th className="cabecalho">Dia do Vencimento</th>
             <th className="cabecalho">Ação</th>
           </tr>
         </thead>
