@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi'
 import Commercial from '../../../models/Commercial'
 import CommercialService from '../../../_services/commercial/commercialService';
+import AlertDialog from './../schedule/schedule';
+
 
 import './commercial.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -91,12 +93,15 @@ const ListCommercial = () => {
               <td className="row_center" style={{ width: '15%' }}>{commercial.price}</td>
               <td className="row_center" style={{ width: '15%' }}>{commercial.total_calls}</td>
               <td className="row_center" style={{ width: '15%' }}>{commercial.due_date}</td>
-              <td><div className="ml-auto">
-                <Link className="btn btn-warning mr-1"
-                  to={`/commercial/edit/${commercial._id}`}>Editar</Link>
-                <Button color="danger"
-                  onClick={e => deleteBy(e, commercial._id)}>Remover</Button>
-              </div></td>
+              <td>
+                <div className="ml-auto">
+                  <AlertDialog />
+                  <Link className="btn btn-warning mr-1"
+                    to={`/commercial/edit/${commercial._id}`}>Editar</Link>
+                  <Button color="danger"
+                    onClick={e => deleteBy(e, commercial._id)}>Remover</Button>
+                </div>
+              </td>
             </tr>
           </tbody>
         ))}
