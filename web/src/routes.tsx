@@ -7,6 +7,9 @@ import Dashboard from './_components/admin/dashboard/Dashboard';
 import ListUser from './_components/admin/user/ListUser';
 import CreateUser from './_components/admin/user/CreateUser';
 import EditUser from './_components/admin/user/EditUser';
+import ListCommercial from './_components/admin/commercial/ListCommercial';
+import CreateCommercial from './_components/admin/commercial/CreateCommercial';
+import EditCommercial from './_components/admin/commercial/EditCommercial';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
@@ -27,6 +30,9 @@ const Routes = () => {
                 <PrivateRoute component={ListUser} path="/user/list" />
                 <PrivateRoute component={CreateUser} path="/user/create" />
                 <PrivateRoute component={EditUser} path="/user/edit/:id" />
+                <PrivateRoute component={ListCommercial} path="/commercial/list" />
+                <PrivateRoute component={CreateCommercial} path="/commercial/create" />
+                <PrivateRoute component={EditCommercial} path="/commercial/edit/:id" />
             </Switch>
         </BrowserRouter>
     );

@@ -8,7 +8,8 @@ const mongoose = require('mongoose')
 const auth = require('../server/middlewares/auth')
 const jwt = require('jsonwebtoken');
 const httpEnum = require('../server/enum/Ehttp')
-var User = require('../server/models/user')
+var User = require('./models/user')
+var Commercial = require('./models/commercial')
 
 mongoose.connect(process.env.URL_MONGODB, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
 
@@ -19,6 +20,7 @@ app.use(cors());
 var router = express.Router();
 
 router.get('/authenticate', function (request, response) {
+
     const [, hash] = request.headers.authorization.split(' ')
     const [username, password] = Buffer.from(hash, 'base64').toString().split(":");
 
@@ -85,10 +87,12 @@ router.route('/user')
         user.email = request.body.email;
 
         user.save(function (error) {
-            if (error)
-                response.send(error);
-
-            response.json({ message: 'User createded.' });
+            if (error) {
+                console.log(error)
+                response.status(500).json({ message: error });
+            } else {
+                response.status(200).json({ message: 'User createded.' });
+            }
         });
     })
 
@@ -123,7 +127,7 @@ router.route('/user/:id')
     })
 
     .delete(function (request, response) {
-        User.remove({
+        User.deleteOne({
             _id: request.params.id
         }, function (error) {
             if (error)
@@ -132,6 +136,91 @@ router.route('/user/:id')
             response.json({ message: 'User deleted.' });
         });
     });
+
+
+//api commercial
+router.get('/commercials', function (request, response) {
+    Commercial.find(function (error, users) {
+        if (error)
+            response.send(error);
+
+        response.json(users);
+    });
+});
+
+router.route('/commercial')
+    .post(function (request, response) {
+        var commercial = new Commercial();
+
+        commercial.name = request.body.name;
+        commercial.address = request.body.address;
+        commercial.number = request.body.number;
+        commercial.neighborhood = request.body.neighborhood;
+        commercial.cnpj_cpf = request.body.cnpj_cpf;
+        commercial.phone = request.body.phone;
+        commercial.mobile_number = request.body.mobile_number;
+        commercial.email = request.body.email;
+        commercial.price = request.body.price;
+        commercial.due_date = request.body.due_date;
+        commercial.total_calls = request.body.total_calls;
+
+        commercial.save(function (error) {
+            if (error) {
+                console.log(error)
+                response.status(500).json({ message: error });
+            } else {
+                response.status(200).json({ message: 'Commercial createded.' });
+            }
+        });
+    })
+
+router.route('/commercial/:id')
+    .get(function (request, response) {
+        Commercial.findById(request.params.id, function (error, commercial) {
+            if (error)
+                response.send(error);
+
+            response.json(commercial);
+        });
+    })
+
+    .put(function (request, response) {
+        Commercial.findById(request.params.id, function (error, commercial) {
+            if (error)
+                response.send(error);
+
+            commercial.name = request.body.name;
+            commercial.address = request.body.address;
+            commercial.number = request.body.number;
+            commercial.neighborhood = request.body.neighborhood;
+            commercial.cnpj_cpf = request.body.cnpj_cpf;
+            commercial.phone = request.body.phone;
+            commercial.mobile_number = request.body.mobile_number;
+            commercial.email = request.body.email;
+            commercial.price = request.body.price;
+            commercial.due_date = request.body.due_date;
+            commercial.total_calls = request.body.total_calls;
+
+            commercial.save(function (error) {
+                if (error)
+                    response.send(error);
+
+                response.json({ message: 'Commercial updateded.' });
+            });
+        });
+    })
+
+    .delete(function (request, response) {
+        Commercial.remove({
+            _id: request.params.id
+        }, function (error) {
+            if (error)
+                response.send(error);
+
+            response.json({ message: 'Commercial deleted.' });
+        });
+    });
+
 
 app.use('/api', router);
 
