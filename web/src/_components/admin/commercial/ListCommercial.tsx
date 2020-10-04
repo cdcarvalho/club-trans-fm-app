@@ -96,9 +96,9 @@ const ListCommercial = () => {
               <td>
                 <div className="ml-auto">
                   <AlertDialog />
-                  <Link className="btn btn-warning mr-1"
+                  <Link className="btn btn-warning mr-1" style={{ width: '100%', marginTop: '2px' }}
                     to={`/commercial/edit/${commercial._id}`}>Editar</Link>
-                  <Button color="danger"
+                  <Button color="danger" style={{ width: '100%', marginTop: '2px' }}
                     onClick={e => deleteBy(e, commercial._id)}>Remover</Button>
                 </div>
               </td>
