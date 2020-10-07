@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const httpEnum = require('../server/enum/Ehttp')
 var User = require('./models/user')
 var Commercial = require('./models/commercial')
+var Schedule = require('./models/schedule')
 
 mongoose.connect(process.env.URL_MONGODB, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
 
@@ -65,7 +66,7 @@ router.get('/token-valid', function (request, response) {
     }
 })
 
-router.use(auth);
+//router.use(auth);
 
 router.get('/users', function (request, response) {
     User.find(function (error, users) {
@@ -211,13 +212,71 @@ router.route('/commercial/:id')
     })
 
     .delete(function (request, response) {
-        Commercial.remove({
+        Commercial.deleteOne({
             _id: request.params.id
         }, function (error) {
             if (error)
                 response.send(error);
 
             response.json({ message: 'Commercial deleted.' });
+        });
+    });
+
+//Schedule
+router.route('/schedule')
+    .post(function (request, response) {
+        var schedule = new Schedule();
+
+        schedule.schedule = request.body.schedule;
+        schedule.id_commercial = request.body.id_commercial;
+
+        schedule.save(function (error) {
+            if (error) {
+                console.log(error)
+                response.status(500).json({ message: error });
+            } else {
+                response.status(200).json({ message: 'Schedule createded.' });
+            }
+        });
+    })
+
+router.get('/schedules', function (request, response) {
+    Schedule.find(function (error, schedules) {
+        if (error)
+            response.send(error);
+
+        response.json(schedules);
+    });
+});
+
+router.route('/schedule/commercial/:idCommercial')
+
+    .get(function (request, response) {
+        try {
+            Schedule.find({ 'id_commercial': request.params.idCommercial }, function (error, schedules) {
+                if (error)
+                    response.send(error);
+
+                if (schedules == null) {
+                    response.sendStatus(httpEnum.httpStatusCode.UNAUTHORIZED);
+                }
+
+                response.json(schedules);
+            });
+        } catch (error) {
+            response.sendStatus(httpEnum.httpStatusCode.SERVER_ERROR);
+        }
+    })
+
+router.route('/schedule/:id')
+    .delete(function (request, response) {
+        Schedule.deleteOne({
+            _id: request.params.id
+        }, function (error) {
+            if (error)
+                response.send(error);
+
+            response.json({ message: 'Schedule deleted.' });
         });
     });
 

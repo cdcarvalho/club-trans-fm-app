@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi'
 import Commercial from '../../../models/Commercial'
 import CommercialService from '../../../_services/commercial/commercialService';
-import AlertDialog from './../schedule/schedule';
+import ScheduleCommercial from './../schedule/schedule';
 
 
 import './commercial.css'
@@ -95,7 +95,7 @@ const ListCommercial = () => {
               <td className="row_center" style={{ width: '15%' }}>{commercial.due_date}</td>
               <td>
                 <div className="ml-auto">
-                  <AlertDialog />
+                  <ScheduleCommercial idCommercial={commercial._id} />
                   <Link className="btn btn-warning mr-1" style={{ width: '100%', marginTop: '2px' }}
                     to={`/commercial/edit/${commercial._id}`}>Editar</Link>
                   <Button color="danger" style={{ width: '100%', marginTop: '2px' }}
