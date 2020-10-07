@@ -54,7 +54,6 @@ const ListUser = () => {
 
   return (
     <div className="body">
-
       <Navbar color="dark" dark>
         <NavbarBrand href="/user/list">Usuários</NavbarBrand>
         <Nav>

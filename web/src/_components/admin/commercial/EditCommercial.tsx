@@ -189,7 +189,7 @@ export const EditCommercial = () => {
             id="total_calls"
             type="text"
             name="total_calls"
-            placeholder="Toral de Chamapadas por Dia"
+            placeholder="Toral de Chamadas por Dia"
             value={inputData.total_calls}
             required
             onChange={changeInput}></Input>

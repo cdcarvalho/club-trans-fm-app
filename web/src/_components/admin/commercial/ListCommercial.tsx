@@ -95,7 +95,7 @@ const ListCommercial = () => {
               <td className="row_center" style={{ width: '15%' }}>{commercial.due_date}</td>
               <td>
                 <div className="ml-auto">
-                  <ScheduleCommercial idCommercial={commercial._id} />
+                  <ScheduleCommercial idCommercial={commercial._id} total_calls={commercial.total_calls} />
                   <Link className="btn btn-warning mr-1" style={{ width: '100%', marginTop: '2px' }}
                     to={`/commercial/edit/${commercial._id}`}>Editar</Link>
                   <Button color="danger" style={{ width: '100%', marginTop: '2px' }}

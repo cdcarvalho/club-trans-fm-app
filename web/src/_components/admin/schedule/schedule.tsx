@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Table } from 'reactstrap'
+import { Button, Table, Label } from 'reactstrap'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Schedule from '../../../models/Schedule'
 import ScheduleService from '../../../_services/schedule/scheduleService';
 
-export const ScheduleCommercial = ({ idCommercial }) => {
+export const ScheduleCommercial = ({ idCommercial, total_calls }) => {
 
     const [schedules, setSchedules] = useState<Schedule[]>([])
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const scheduleService = new ScheduleService();
 
     const handleClickOpen = () => {
@@ -73,40 +72,46 @@ export const ScheduleCommercial = ({ idCommercial }) => {
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
-                style={{ width: '100%' }}
-            >
+                fullWidth={true}
+                maxWidth="xs">
+
                 <DialogTitle id="alert-dialog-title">{"Horários"}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        <Table bordered>
-                            <thead>
+                    <Label className="strong">Total de chamadas ao dia: {total_calls}</Label>
+
+
+                    <Table bordered>
+                        <thead>
+                            <tr>
+                                <th className="cabecalho">Horário</th>
+                                <th className="cabecalho">Ação</th>
+                            </tr>
+                        </thead>
+                        {schedules.map(schedule => (
+                            <tbody key={schedule._id}>
                                 <tr>
-                                    <th className="cabecalho">Horário</th>
-                                    <th className="cabecalho">Ação</th>
+                                    <td className="row_center" style={{ width: '50%' }}>{schedule.schedule}</td>
+                                    <td style={{ width: '10%' }}>
+                                        <div className="ml-auto">
+                                            <Button color="danger"
+                                                style={{ width: '100%', marginTop: '2px' }}
+                                                title="Remover"
+                                                onClick={e => deleteBy(e, schedule._id)}>x</Button>
+                                        </div>
+                                    </td>
                                 </tr>
-                            </thead>
-                            {schedules.map(schedule => (
-                                <tbody key={schedule._id}>
-                                    <tr>
-                                        <td className="row_center" style={{ width: '25%' }}>{schedule.schedule}</td>
-                                        <td>
-                                            <div className="ml-auto">
-                                                <Button color="danger"
-                                                    style={{ width: '100%', marginTop: '2px' }}
-                                                    title="Remover"
-                                                    onClick={e => deleteBy(e, schedule._id)}>x</Button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            ))}
-                        </Table>
-                    </DialogContentText>
+                            </tbody>
+                        ))}
+                    </Table>
+                    <Label className="strong">Total de Registros: {schedules.length}</Label>
                 </DialogContent>
                 <DialogActions>
+                    <Button color="primary"
+                        style={{ width: '50%', marginTop: '2px' }}>Gerar Novos Horários
+                        </Button>
                     <Button onClick={handleClose} color="secondary">
                         Fechar
-                    </Button>
+                        </Button>
                 </DialogActions>
             </Dialog>
         </div>
