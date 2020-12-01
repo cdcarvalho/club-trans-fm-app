@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 const ListCommercial = () => {
   const [commecials, setCommecials] = useState<Commercial[]>([])
   const [incoming, setIncoming] = useState<Number>();
+  const [output, setOutput] = useState<Number>();
   const commercialService = new CommercialService();
 
   useEffect(() => {
@@ -26,6 +27,12 @@ const ListCommercial = () => {
       }).catch((error: string) => {
         alert(error)
       });
+
+      if (findCommercial) {
+        totalInputs()
+        totalOutputs()
+      }
+
     } catch (error) {
       alert(error);
     }
@@ -34,6 +41,7 @@ const ListCommercial = () => {
       findCommercial = false
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commercialService])
 
   function getCommercials() {
@@ -46,23 +54,31 @@ const ListCommercial = () => {
     }
   }
 
-  /*
-  function teste() {
+  function totalInputs() {
     try {
-      var total = 2;
+      var total = 0;
 
       commecials.map(commercial => (
-        total = + commercial.price
+        total = + commercial.price * commercial.percentage / 100
       ))
-
       setIncoming(total)
-      console.log(incoming)
     } catch (error) {
       alert(error);
     }
   }
 
-*/
+  function totalOutputs() {
+    try {
+      var total = 0;
+
+      commecials.map(commercial => (
+        total = + commercial.price - (commercial.price * commercial.percentage / 100)
+      ))
+      setOutput(total)
+    } catch (error) {
+      alert(error);
+    }
+  }
 
   const deleteBy = async (event: any, id: number) => {
     event.persist()
@@ -74,7 +90,6 @@ const ListCommercial = () => {
       alert(error);
     }
   }
-
   return (
     <div className="body">
 
@@ -126,7 +141,9 @@ const ListCommercial = () => {
         ))}
       </Table>
 
-      <Label className="strong"> Total:  {incoming}</Label>
+      <Label className="strong" style={{ color: 'blue' }}> Total a receber: {incoming?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</Label>
+      <br />
+      <Label className="strong" style={{ color: 'red' }}> Total pago ao Locutor: R$: {output?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</Label>
 
       <footer>
         <Link to="/dashboard">
