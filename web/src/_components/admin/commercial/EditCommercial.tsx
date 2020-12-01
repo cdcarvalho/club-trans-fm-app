@@ -24,6 +24,8 @@ export const EditCommercial = () => {
     price: '',
     due_date: '',
     total_calls: '',
+    speaker: '',
+    percentage: '',
   })
 
   function changeInput(event: ChangeEvent<HTMLInputElement>) {
@@ -35,11 +37,12 @@ export const EditCommercial = () => {
     event.preventDefault()
 
     const { name, address, number, neighborhood, cnpj_cpf,
-      phone, mobile_number, email, price, due_date, total_calls } = inputData;
+      phone, mobile_number, email, price, due_date, total_calls,
+      speaker, percentage } = inputData;
 
     const data = {
       name, address, number, neighborhood, cnpj_cpf,
-      phone, mobile_number, email, price, due_date, total_calls
+      phone, mobile_number, email, price, due_date, total_calls, speaker, percentage
     };
 
     await api.put(`commercial/${id}`, data, {
@@ -75,7 +78,9 @@ export const EditCommercial = () => {
       email: response.data.email,
       price: response.data.price,
       due_date: response.data.due_date,
-      total_calls: response.data.total_calls
+      total_calls: response.data.total_calls,
+      speaker: response.data.speaker,
+      percentage: response.data.percentage
     }
 
     setInputData(commercial)
@@ -119,6 +124,7 @@ export const EditCommercial = () => {
             required
             onChange={changeInput}></Input>
 
+          <Label className="strong">Número:</Label>
           <Input
             id="number"
             type="text"
@@ -165,10 +171,32 @@ export const EditCommercial = () => {
             value={inputData.email}
             onChange={changeInput}></Input>
 
+          <Label className="strong">Locutor Responsável:</Label>
+          <Input
+            id="speaker"
+            type="text"
+            name="speaker"
+            placeholder="Locutor Responsável"
+            value={inputData.speaker}
+            required
+            onChange={changeInput}></Input>
+
+          <Label className="strong">Percentual (%):</Label>
+          <Input
+            id="percentage"
+            type="number"
+            min="1"
+            max="100"
+            name="percentage"
+            placeholder="Percentual do Locutor"
+            value={inputData.percentage}
+            required
+            onChange={changeInput}></Input>
+
           <Label className="strong">Preço:</Label>
           <Input
             id="price"
-            type="text"
+            type="number"
             name="price"
             placeholder="Preço"
             value={inputData.price}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Button, Navbar, Nav, NavItem, NavbarBrand } from 'reactstrap'
+import { Table, Button, Navbar, Nav, NavItem, NavbarBrand, Label } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi'
 import Commercial from '../../../models/Commercial'
@@ -13,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 const ListCommercial = () => {
   const [commecials, setCommecials] = useState<Commercial[]>([])
+  const [incoming, setIncoming] = useState<Number>();
   const commercialService = new CommercialService();
 
   useEffect(() => {
@@ -45,6 +46,24 @@ const ListCommercial = () => {
     }
   }
 
+  /*
+  function teste() {
+    try {
+      var total = 2;
+
+      commecials.map(commercial => (
+        total = + commercial.price
+      ))
+
+      setIncoming(total)
+      console.log(incoming)
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+*/
+
   const deleteBy = async (event: any, id: number) => {
     event.persist()
     try {
@@ -73,9 +92,9 @@ const ListCommercial = () => {
           <tr>
             <th className="cabecalho">CNPJ/CPF</th>
             <th className="cabecalho">Nome</th>
-            <th className="cabecalho">Endereço</th>
-            <th className="cabecalho">Bairro</th>
             <th className="cabecalho">Telefone</th>
+            <th className="cabecalho">Responsável</th>
+            <th className="cabecalho">Percentual (%)</th>
             <th className="cabecalho">Preço</th>
             <th className="cabecalho">Total de Chamadas</th>
             <th className="cabecalho">Dia do Vencimento</th>
@@ -85,11 +104,11 @@ const ListCommercial = () => {
         {commecials.map(commercial => (
           <tbody key={commercial._id}>
             <tr>
-              <td className="row_center" style={{ width: '25%' }}>{commercial.cnpj_cpf}</td>
-              <td className="row_center" style={{ width: '20%' }}>{commercial.name}</td>
-              <td className="row_center" style={{ width: '25%' }}>{commercial.address} - {commercial.number}</td>
-              <td className="row_center" style={{ width: '15%' }}>{commercial.neighborhood}</td>
+              <td className="row_center" style={{ width: '10%' }}>{commercial.cnpj_cpf}</td>
+              <td className="row_center" style={{ width: '30%' }}>{commercial.name}</td>
               <td className="row_center" style={{ width: '25%' }}>{commercial.phone} - {commercial.mobile_number}</td>
+              <td className="row_center" style={{ width: '20%' }}>{commercial.speaker}</td>
+              <td className="row_center" style={{ width: '25%' }}>{commercial.percentage}</td>
               <td className="row_center" style={{ width: '15%' }}>{commercial.price}</td>
               <td className="row_center" style={{ width: '15%' }}>{commercial.total_calls}</td>
               <td className="row_center" style={{ width: '15%' }}>{commercial.due_date}</td>
@@ -106,6 +125,8 @@ const ListCommercial = () => {
           </tbody>
         ))}
       </Table>
+
+      <Label className="strong"> Total:  {incoming}</Label>
 
       <footer>
         <Link to="/dashboard">

@@ -164,6 +164,8 @@ router.route('/commercial')
         commercial.price = request.body.price;
         commercial.due_date = request.body.due_date;
         commercial.total_calls = request.body.total_calls;
+        commercial.speaker = request.body.speaker;
+        commercial.percentage = request.body.percentage;
 
         commercial.save(function (error) {
             if (error) {
@@ -201,6 +203,8 @@ router.route('/commercial/:id')
             commercial.price = request.body.price;
             commercial.due_date = request.body.due_date;
             commercial.total_calls = request.body.total_calls;
+            commercial.speaker = request.body.speaker;
+            commercial.percentage = request.body.percentage;
 
             commercial.save(function (error) {
                 if (error)

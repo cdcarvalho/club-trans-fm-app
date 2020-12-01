@@ -5,10 +5,12 @@ export default class Commercial {
     number: number
     neighborhood: string
     cnpj_cpf: string
-    phone: String
-    mobile_number: String
-    email: String
-    price: String
+    phone: string
+    mobile_number: string
+    email: string
+    price: number
     due_date: Date
     total_calls: number
+    speaker: string
+    percentage: number
 }

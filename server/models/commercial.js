@@ -12,7 +12,9 @@ var commercialSchema = new Schema({
     email: String,
     price: { type: String, required: true },
     due_date: { type: Number, required: true },
-    total_calls: { type: Number, required: true }
+    total_calls: { type: Number, required: true },
+    speaker: { type: String, required: true },
+    percentage: { type: Number, required: true }
 });
 
 module.exports = mongoose.model('Commercial', commercialSchema);

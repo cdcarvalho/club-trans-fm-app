@@ -23,6 +23,8 @@ export const CreateCommercial = () => {
         price: '',
         due_date: '',
         total_calls: '',
+        speaker: '',
+        percentage: '',
     });
 
     function changeInput(event: ChangeEvent<HTMLInputElement>) {
@@ -34,11 +36,13 @@ export const CreateCommercial = () => {
         event.preventDefault();
 
         const { name, address, number, neighborhood, cnpj_cpf,
-            phone, mobile_number, email, price, due_date, total_calls } = inputData;
+            phone, mobile_number, email, price, due_date, total_calls,
+            speaker, percentage } = inputData;
 
         const data = {
             name, address, number, neighborhood, cnpj_cpf,
-            phone, mobile_number, email, price, due_date, total_calls
+            phone, mobile_number, email, price, due_date, total_calls,
+            speaker, percentage
         };
 
         await api.post('commercial', data, {
@@ -138,10 +142,32 @@ export const CreateCommercial = () => {
                             value={inputData.email}
                             onChange={changeInput}></Input>
 
+                        <Label className="strong">Locutor Responsável:</Label>
+                        <Input
+                            id="speaker"
+                            type="text"
+                            name="speaker"
+                            placeholder="Locutor Responsável"
+                            value={inputData.speaker}
+                            required
+                            onChange={changeInput}></Input>
+
+                        <Label className="strong">Percentual (%):</Label>
+                        <Input
+                            id="percentage"
+                            type="number"
+                            min="1"
+                            max="100"
+                            name="percentage"
+                            placeholder="Percentual do Locutor"
+                            value={inputData.percentage}
+                            required
+                            onChange={changeInput}></Input>
+
                         <Label className="strong">Preço:</Label>
                         <Input
                             id="price"
-                            type="text"
+                            type="number"
                             name="price"
                             placeholder="Preço"
                             value={inputData.price}
