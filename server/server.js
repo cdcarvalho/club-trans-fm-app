@@ -11,6 +11,7 @@ const httpEnum = require('../server/enum/Ehttp')
 var User = require('./models/user')
 var Commercial = require('./models/commercial')
 var Schedule = require('./models/schedule')
+var Speaker = require('./models/speaker')
 
 mongoose.connect(process.env.URL_MONGODB, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
 
@@ -284,6 +285,47 @@ router.route('/schedule/:id')
         });
     });
 
+
+//Speaker
+router.route('/speaker')
+    .post(function (request, response) {
+        var speaker = new Speaker();
+
+        speaker.name = request.body.name;
+        speaker.mobile_number = request.body.mobile_number;
+        speaker.schedule = request.body.schedule;
+
+        speaker.save(function (error) {
+            if (error) {
+                console.log(error)
+                response.status(500).json({ message: error });
+            } else {
+                response.status(200).json({ message: 'Speaker createded.' });
+            }
+        });
+    })
+
+router.get('/speakers', function (request, response) {
+    Speaker.find(function (error, speakers) {
+        if (error)
+            response.send(error);
+
+        response.json(speakers);
+    });
+});
+
+
+router.route('/speaker/:id')
+    .delete(function (request, response) {
+        Speaker.deleteOne({
+            _id: request.params.id
+        }, function (error) {
+            if (error)
+                response.send(error);
+
+            response.json({ message: 'Speaker deleted.' });
+        });
+    });
 
 app.use('/api', router);
 
