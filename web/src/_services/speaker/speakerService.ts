@@ -1,24 +1,24 @@
 import api from '../api'
 import { getToken } from '../auth'
-import Commercial from '../../models/Commercial'
+import Speaker from '../../models/Speaker'
 
-export class CommercialService {
+export class SpeakerService {
   // eslint-disable-next-line
   constructor() { }
 
-  async getCommercials(): Promise<Commercial[]> {
+  async getSpeakers(): Promise<Speaker[]> {
     try {
-      const commercials = api.get('commercials', {
+      const speakers = api.get('speakers', {
         headers: {
           Authorization: `Basic ${getToken()}`
         }
-      }).then(commercials => {
-        return commercials.data;
+      }).then(speakers => {
+        return speakers.data;
       }).catch(() => {
         alert('Nenhum registro encontrado.')
         return [];
       })
-      return commercials;
+      return speakers;
     } catch (error) {
       return [];
     }
@@ -26,7 +26,7 @@ export class CommercialService {
 
   async delete(id: number) {
     try {
-      await api.delete(`commercial/${id}`, {
+      await api.delete(`speaker/${id}`, {
         headers: {
           Authorization: `Basic ${getToken()}`
         }
@@ -36,9 +36,9 @@ export class CommercialService {
         alert(error)
       })
     } catch (error) {
-      alert('Ocorreu um erro ao remover o comercial.')
+      alert('Ocorreu um erro ao remover o locutor.')
     }
   }
 }
 
-export default CommercialService;
+export default SpeakerService;

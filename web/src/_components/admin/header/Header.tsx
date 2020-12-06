@@ -23,6 +23,9 @@ const Header = () => {
                         <Link to="/commercial/list" className="btn btn-primary link-menu">Comercial</Link>
                     </NavItem>
                     <NavItem>
+                        <Link to="/speaker/list" className="btn btn-primary link-menu">Locutor</Link>
+                    </NavItem>
+                    <NavItem>
                         <Link to="/" onClick={() => logout()} className="btn btn-secondary link-menu">Sair</Link>
                     </NavItem>
                 </Nav>

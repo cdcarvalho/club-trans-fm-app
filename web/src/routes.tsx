@@ -10,6 +10,7 @@ import EditUser from './_components/admin/user/EditUser';
 import ListCommercial from './_components/admin/commercial/ListCommercial';
 import CreateCommercial from './_components/admin/commercial/CreateCommercial';
 import EditCommercial from './_components/admin/commercial/EditCommercial';
+import ListSpeaker from './_components/admin/speaker/ListSpeaker';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
@@ -33,6 +34,7 @@ const Routes = () => {
                 <PrivateRoute component={ListCommercial} path="/commercial/list" />
                 <PrivateRoute component={CreateCommercial} path="/commercial/create" />
                 <PrivateRoute component={EditCommercial} path="/commercial/edit/:id" />
+                <PrivateRoute component={ListSpeaker} path="/speaker/list" />
             </Switch>
         </BrowserRouter>
     );
