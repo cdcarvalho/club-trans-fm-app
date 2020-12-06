@@ -59,7 +59,7 @@ const ListCommercial = () => {
       var total = 0;
 
       commecials.map(commercial => (
-        total = + commercial.price * commercial.percentage / 100
+        total = + total + (commercial.price * commercial.percentage / 100)
       ))
       setIncoming(total)
     } catch (error) {
@@ -72,7 +72,7 @@ const ListCommercial = () => {
       var total = 0;
 
       commecials.map(commercial => (
-        total = + commercial.price - (commercial.price * commercial.percentage / 100)
+        total = + total + (commercial.price - (commercial.price * commercial.percentage / 100))
       ))
       setOutput(total)
     } catch (error) {
