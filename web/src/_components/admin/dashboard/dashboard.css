@@ -1,4 +1,4 @@
- .body {
+.body {
     width: 80rem !important;
     margin: 1rem auto !important;
  }
@@ -8,5 +8,6 @@
  }
 
  #dashbord {
-  height: 100vh;
+  height: 80vh;
+  background: url('../../../assets/logo.png') no-repeat 250px bottom;
 }

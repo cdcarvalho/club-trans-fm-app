@@ -1,9 +1,4 @@
- #header {
-    width: 80rem !important;
-    margin: 1rem auto !important;
- }
-
- .link-menu {
+.btn-schedule {
   margin-right: 5px !important;
   background-color: #ec4534 !important;
   border-color: white !important;

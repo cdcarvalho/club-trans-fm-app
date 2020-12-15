@@ -7,6 +7,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Schedule from '../../../models/Schedule'
 import ScheduleService from '../../../_services/schedule/scheduleService';
 
+import './schedule.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+
 export const ScheduleCommercial = ({ idCommercial, total_calls }) => {
 
     const [schedules, setSchedules] = useState<Schedule[]>([])
@@ -106,7 +110,7 @@ export const ScheduleCommercial = ({ idCommercial, total_calls }) => {
                     <Label className="strong">Total de Registros: {schedules.length}</Label>
                 </DialogContent>
                 <DialogActions>
-                    <Button color="primary"
+                    <Button id="gerar-horarios" className="btn-schedule"
                         style={{ width: '50%', marginTop: '2px' }}>Gerar Novos Horários
                         </Button>
                     <Button onClick={handleClose} color="secondary">

@@ -121,7 +121,7 @@ const ListCommercial = () => {
             <tr>
               <td className="row_center" style={{ width: '10%' }}>{commercial.cnpj_cpf}</td>
               <td className="row_center" style={{ width: '30%' }}>{commercial.name}</td>
-              <td className="row_center" style={{ width: '25%' }}>{commercial.phone} - {commercial.mobile_number}</td>
+              <td className="row_center" title={"Celular: " + commercial.mobile_number} style={{ width: '25%' }}>{commercial.phone}</td>
               <td className="row_center" style={{ width: '20%' }}>{commercial.speaker}</td>
               <td className="row_center" style={{ width: '25%' }}>{commercial.percentage}</td>
               <td className="row_center" style={{ width: '15%' }}>{commercial.price}</td>

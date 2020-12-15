@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #17aaff;
+  --primary-color: #ea5b34;
   --title-color: #130e1b;
   --text-color: #000000;
 }
@@ -11,7 +11,7 @@
 }
 
 body {
-  background: #F0F0F5;
+  background: #ea5b34;
   -webkit-font-smoothing: antialiased;
   color: var(--text-color);
 }
