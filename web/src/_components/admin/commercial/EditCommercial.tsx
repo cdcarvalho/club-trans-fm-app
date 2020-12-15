@@ -57,10 +57,10 @@ export const EditCommercial = () => {
   }
 
   useEffect(() => {
-    loadUser(id)
+    loadCommercial(id)
   }, [id])
 
-  async function loadUser(id: string) {
+  async function loadCommercial(id: string) {
     const response = await api.get(`commercial/${id}`, {
       headers: {
         Authorization: `Basic ${getToken()}`
@@ -91,7 +91,7 @@ export const EditCommercial = () => {
   }
 
   return (
-    <div id="page-create-user" className="body_form">
+    <div id="page-create-commercial" className="body_form">
       <Form onSubmit={changeForm}>
         <FormGroup>
           <Label className="strong">CNPJ/CPF:</Label>

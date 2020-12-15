@@ -314,6 +314,35 @@ router.get('/speakers', function (request, response) {
     });
 });
 
+router.route('/speaker/:id')
+
+    .get(function (request, response) {
+        Speaker.findById(request.params.id, function (error, speaker) {
+            if (error)
+                response.send(error);
+
+            response.json(speaker);
+        });
+    })
+
+    .put(function (request, response) {
+        Speaker.findById(request.params.id, function (error, speaker) {
+            if (error)
+                response.send(error);
+
+            speaker.name = request.body.name;
+            speaker.mobile_number = request.body.mobile_number;
+            speaker.schedule = request.body.schedule;
+
+            speaker.save(function (error) {
+                if (error)
+                    response.send(error);
+
+                response.json({ message: 'Speaker updateded.' });
+            });
+        });
+    })
+
 
 router.route('/speaker/:id')
     .delete(function (request, response) {
