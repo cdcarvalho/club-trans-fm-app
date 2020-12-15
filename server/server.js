@@ -12,6 +12,7 @@ var User = require('./models/user')
 var Commercial = require('./models/commercial')
 var Schedule = require('./models/schedule')
 var Speaker = require('./models/speaker')
+var Expense = require('./models/expense')
 
 mongoose.connect(process.env.URL_MONGODB, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
 
@@ -353,6 +354,78 @@ router.route('/speaker/:id')
                 response.send(error);
 
             response.json({ message: 'Speaker deleted.' });
+        });
+    });
+
+//Expense
+router.route('/expense')
+    .post(function (request, response) {
+        var expense = new Expense();
+
+        expense.description = request.body.description;
+        expense.phone = request.body.phone;
+        expense.month = request.body.month;
+        expense.price = request.body.price;
+
+        expense.save(function (error) {
+            if (error) {
+                console.log(error)
+                response.status(500).json({ message: error });
+            } else {
+                response.status(200).json({ message: 'Expense createded.' });
+            }
+        });
+    })
+
+router.get('/expenses', function (request, response) {
+    Expense.find(function (error, expenses) {
+        if (error)
+            response.send(error);
+
+        response.json(expenses);
+    });
+});
+
+router.route('/expense/:id')
+
+    .get(function (request, response) {
+        Expense.findById(request.params.id, function (error, expense) {
+            if (error)
+                response.send(error);
+
+            response.json(expense);
+        });
+    })
+
+    .put(function (request, response) {
+        Expense.findById(request.params.id, function (error, expense) {
+            if (error)
+                response.send(error);
+
+            expense.description = request.body.description;
+            expense.phone = request.body.phone;
+            expense.month = request.body.month;
+            expense.price = request.body.price;
+
+            expense.save(function (error) {
+                if (error)
+                    response.send(error);
+
+                response.json({ message: 'Expense updateded.' });
+            });
+        });
+    })
+
+
+router.route('/expense/:id')
+    .delete(function (request, response) {
+        Expense.deleteOne({
+            _id: request.params.id
+        }, function (error) {
+            if (error)
+                response.send(error);
+
+            response.json({ message: 'Expense deleted.' });
         });
     });
 

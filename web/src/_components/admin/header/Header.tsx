@@ -26,6 +26,9 @@ const Header = () => {
                         <Link to="/speaker/list" className="btn btn-primary link-menu">Locutor</Link>
                     </NavItem>
                     <NavItem>
+                        <Link to="/expense/list" className="btn btn-primary link-menu">Dispesa</Link>
+                    </NavItem>
+                    <NavItem>
                         <Link to="/" onClick={() => logout()} className="btn btn-secondary link-menu">Sair</Link>
                     </NavItem>
                 </Nav>

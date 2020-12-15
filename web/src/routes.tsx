@@ -13,6 +13,9 @@ import EditCommercial from './_components/admin/commercial/EditCommercial';
 import ListSpeaker from './_components/admin/speaker/ListSpeaker';
 import CreateSpeaker from './_components/admin/speaker/CreateSpeaker';
 import EditSpeaker from './_components/admin/speaker/EditSpeaker';
+import ListExpense from './_components/admin/expense/ListExpense';
+import CreateExpense from './_components/admin/expense/CreateExpense';
+import EditExpense from './_components/admin/expense/EditExpense';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
@@ -39,6 +42,9 @@ const Routes = () => {
                 <PrivateRoute component={ListSpeaker} path="/speaker/list" />
                 <PrivateRoute component={CreateSpeaker} path="/speaker/create" />
                 <PrivateRoute component={EditSpeaker} path="/speaker/edit/:id" />
+                <PrivateRoute component={ListExpense} path="/expense/list" />
+                <PrivateRoute component={CreateExpense} path="/expense/create" />
+                <PrivateRoute component={EditExpense} path="/expense/edit/:id" />
             </Switch>
         </BrowserRouter>
     );
