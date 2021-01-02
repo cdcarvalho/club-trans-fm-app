@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 export const EditCommercial = () => {
 
-  const history = useHistory()
+  const history = useHistory();
   const { id }: any = useParams();
 
   const [inputData, setInputData] = useState({
@@ -26,6 +26,7 @@ export const EditCommercial = () => {
     total_calls: '',
     speaker: '',
     percentage: '',
+    typeCommercial: '',
   })
 
   function changeInput(event: ChangeEvent<HTMLInputElement>) {
@@ -38,11 +39,12 @@ export const EditCommercial = () => {
 
     const { name, address, number, neighborhood, cnpj_cpf,
       phone, mobile_number, email, price, due_date, total_calls,
-      speaker, percentage } = inputData;
+      speaker, percentage, typeCommercial } = inputData;
 
     const data = {
       name, address, number, neighborhood, cnpj_cpf,
-      phone, mobile_number, email, price, due_date, total_calls, speaker, percentage
+      phone, mobile_number, email, price, due_date, total_calls, speaker, percentage,
+      typeCommercial
     };
 
     await api.put(`commercial/${id}`, data, {
@@ -80,7 +82,8 @@ export const EditCommercial = () => {
       due_date: response.data.due_date,
       total_calls: response.data.total_calls,
       speaker: response.data.speaker,
-      percentage: response.data.percentage
+      percentage: response.data.percentage,
+      typeCommercial: response.data.typeCommercial
     }
 
     setInputData(commercial)
@@ -220,6 +223,15 @@ export const EditCommercial = () => {
             placeholder="Toral de Chamadas por Dia"
             value={inputData.total_calls}
             required
+            onChange={changeInput}></Input>
+
+          <Label className="strong">Tipo de Comercial:</Label>
+          <Input
+            id="typeCommercial"
+            type="text"
+            name="typeCommercial"
+            placeholder="Tipo de Comercial"
+            value={inputData.typeCommercial}
             onChange={changeInput}></Input>
         </FormGroup>
 

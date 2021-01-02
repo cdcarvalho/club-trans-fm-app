@@ -25,6 +25,7 @@ export const CreateCommercial = () => {
         total_calls: '',
         speaker: '',
         percentage: '',
+        typeCommercial: '',
     });
 
     function changeInput(event: ChangeEvent<HTMLInputElement>) {
@@ -37,12 +38,12 @@ export const CreateCommercial = () => {
 
         const { name, address, number, neighborhood, cnpj_cpf,
             phone, mobile_number, email, price, due_date, total_calls,
-            speaker, percentage } = inputData;
+            speaker, percentage, typeCommercial } = inputData;
 
         const data = {
             name, address, number, neighborhood, cnpj_cpf,
             phone, mobile_number, email, price, due_date, total_calls,
-            speaker, percentage
+            speaker, percentage, typeCommercial
         };
 
         await api.post('commercial', data, {
@@ -192,6 +193,16 @@ export const CreateCommercial = () => {
                             placeholder="Toral de Chamapadas por Dia"
                             value={inputData.total_calls}
                             required
+                            onChange={changeInput}></Input>
+
+
+                        <Label className="strong">Tipo de Comercial:</Label>
+                        <Input
+                            id="typeCommercial"
+                            type="text"
+                            name="typeCommercial"
+                            placeholder="Tipo de Comercial"
+                            value={inputData.typeCommercial}
                             onChange={changeInput}></Input>
                     </FormGroup>
 

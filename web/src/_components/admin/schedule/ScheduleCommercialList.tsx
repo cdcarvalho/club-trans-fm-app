@@ -6,12 +6,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Schedule from '../../../models/Schedule'
 import ScheduleService from '../../../_services/schedule/scheduleService';
+import ScheduleCommercialManual from '../schedule/ScheduleCommercialManual';
+import ScheduleCommercialAutomatic from '../schedule/ScheduleCommercialAutomatic';
 
 import './schedule.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
-export const ScheduleCommercial = ({ idCommercial, total_calls }) => {
+export const ScheduleCommercialList = ({ idCommercial, total_calls }) => {
 
     const [schedules, setSchedules] = useState<Schedule[]>([])
     const [open, setOpen] = useState(false);
@@ -28,13 +30,15 @@ export const ScheduleCommercial = ({ idCommercial, total_calls }) => {
     useEffect(() => {
         let findSchedule = true;
         try {
-            scheduleService.getSchedules(idCommercial).then(schedules => {
-                if (findSchedule) {
-                    setSchedules(schedules);
-                }
-            }).catch((error: string) => {
-                alert(error)
-            });
+            if (open) {
+                scheduleService.getSchedules(idCommercial).then(schedules => {
+                    if (findSchedule) {
+                        setSchedules(schedules);
+                    }
+                }).catch((error: string) => {
+                    alert(error)
+                });
+            }
         } catch (error) {
             alert(error);
         }
@@ -43,7 +47,7 @@ export const ScheduleCommercial = ({ idCommercial, total_calls }) => {
             findSchedule = false
         }
 
-    }, [scheduleService, idCommercial])
+    }, [scheduleService, idCommercial, open])
 
     function getSchedules() {
         try {
@@ -79,7 +83,7 @@ export const ScheduleCommercial = ({ idCommercial, total_calls }) => {
                 fullWidth={true}
                 maxWidth="xs">
 
-                <DialogTitle id="alert-dialog-title">{"Horários"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">Horários</DialogTitle>
                 <DialogContent>
                     <Label className="strong">Total de chamadas ao dia: {total_calls}</Label>
 
@@ -110,9 +114,8 @@ export const ScheduleCommercial = ({ idCommercial, total_calls }) => {
                     <Label className="strong">Total de Registros: {schedules.length}</Label>
                 </DialogContent>
                 <DialogActions>
-                    <Button id="gerar-horarios" className="btn-schedule"
-                        style={{ width: '50%', marginTop: '2px' }}>Gerar Novos Horários
-                        </Button>
+                    <ScheduleCommercialManual idCommercial={idCommercial} limitCalls={total_calls - schedules.length} />
+                    <ScheduleCommercialAutomatic idCommercial={idCommercial} limitCalls={total_calls - schedules.length} />
                     <Button onClick={handleClose} color="secondary">
                         Fechar
                         </Button>
@@ -122,4 +125,4 @@ export const ScheduleCommercial = ({ idCommercial, total_calls }) => {
     );
 }
 
-export default ScheduleCommercial;
+export default ScheduleCommercialList;

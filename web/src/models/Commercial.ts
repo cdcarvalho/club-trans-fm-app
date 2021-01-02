@@ -13,4 +13,5 @@ export default class Commercial {
     total_calls: number
     speaker: string
     percentage: number
+    typeCommecial: string
 }

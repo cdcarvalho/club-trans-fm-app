@@ -14,7 +14,8 @@ var commercialSchema = new Schema({
     due_date: { type: Number, required: true },
     total_calls: { type: Number, required: true },
     speaker: { type: String, required: true },
-    percentage: { type: Number, required: true }
+    percentage: { type: Number, required: true },
+    typeCommercial: { type: String, required: true }
 });
 
 module.exports = mongoose.model('Commercial', commercialSchema);

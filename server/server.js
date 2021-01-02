@@ -168,6 +168,7 @@ router.route('/commercial')
         commercial.total_calls = request.body.total_calls;
         commercial.speaker = request.body.speaker;
         commercial.percentage = request.body.percentage;
+        commercial.typeCommercial = request.body.typeCommercial;
 
         commercial.save(function (error) {
             if (error) {
@@ -207,6 +208,7 @@ router.route('/commercial/:id')
             commercial.total_calls = request.body.total_calls;
             commercial.speaker = request.body.speaker;
             commercial.percentage = request.body.percentage;
+            commercial.typeCommercial = request.body.typeCommercial;
 
             commercial.save(function (error) {
                 if (error)
@@ -234,7 +236,7 @@ router.route('/schedule')
         var schedule = new Schedule();
 
         schedule.schedule = request.body.schedule;
-        schedule.id_commercial = request.body.id_commercial;
+        schedule.id_commercial = request.body.idCommercial;
 
         schedule.save(function (error) {
             if (error) {

@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi'
 import Commercial from '../../../models/Commercial'
 import CommercialService from '../../../_services/commercial/commercialService';
-import ScheduleCommercial from './../schedule/schedule';
-
+import ScheduleCommercialList from '../schedule/ScheduleCommercialList';
 
 import './commercial.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -129,7 +128,7 @@ const ListCommercial = () => {
               <td className="row_center" style={{ width: '15%' }}>{commercial.due_date}</td>
               <td>
                 <div className="ml-auto">
-                  <ScheduleCommercial idCommercial={commercial._id} total_calls={commercial.total_calls} />
+                  <ScheduleCommercialList idCommercial={commercial._id} total_calls={commercial.total_calls} />
                   <Link className="btn btn-warning mr-1" style={{ width: '100%', marginTop: '2px' }}
                     to={`/commercial/edit/${commercial._id}`}>Editar</Link>
                   <Button color="danger" style={{ width: '100%', marginTop: '2px' }}
